@@ -14,9 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->string("name", 30);
             $table->string("email", 25);
-            $table->integer("edad");
+            $table->integer("edad")->nullable(); // Hacemos que "edad" sea opcional
             $table->string("telephone", 9);
-            $table->string("languaje", 25);
+            $table->string("language", 25); // Corregimos el nombre de "languaje" a "language"
             $table->timestamps();
         });
     }

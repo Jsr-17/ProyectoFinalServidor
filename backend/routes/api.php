@@ -3,20 +3,19 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controller\Api\StudentController;
+use App\Http\Controllers\Api\StudentController;
 
 Route::get("students", [StudentController::class, "index"]);
 
-Route::get("students/{id}", );
+Route::get(
+    "students/{id}",
+    [StudentController::class, "show"]
+);
 
 
-Route::post("students", function () {
-    return "crear tonto ";
-});
+Route::post("students", [StudentController::class, "store"]);
 
-Route::put("students/{id}", function () {
-    return "actualizar tonto";
-});
+Route::put("students/{id}", [StudentController::class,"update"]);
 Route::delete("students/{id}", function () {
     return "Eliminar tonto";
 });

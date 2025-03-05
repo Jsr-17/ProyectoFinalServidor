@@ -27,7 +27,6 @@ class CholloController extends Controller
         ];
 
         return response()->json(["message" => $data, "status" => 200]);
-
     }
     public function buscarId($id)
     {
@@ -97,11 +96,30 @@ class CholloController extends Controller
                 "status" => 500
             ], 500);
         }
-
     }
     public function modificarChollo(Request $request)
     {
-
+        if (!$request) {
+            return response()->json(["message" => "Debe enviar usuario válido"], 404);
+        }
+        $data = $request->all();
+        $registro = Chollo::find($data["id"]);
+        if (!$registro) {
+            $data = ["message" => "El chollo no existe"];
+            return response()->json($data, 404);
+        }
+        $registro->update($data);
+        return response()->json(["message" => "Chollo actualizado correctamente", "chollo" => $registro], 200);
     }
+    public function borrarChollo(int $id)
+    {
+        $registro = Chollo::find($id);
+        if (!$registro) {
+            return response()->json(["message" => "El chollo no existe"], 404);
+        }
 
+        $registro->delete();
+
+        return response()->json(["message" => "Chollo eliminado correctamente"], 200);
+    }
 }

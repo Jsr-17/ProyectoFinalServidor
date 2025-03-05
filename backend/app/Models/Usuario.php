@@ -18,4 +18,9 @@ class Usuario extends Model
 
     ];
 
+    public function chollos()
+    {
+        return $this->belongsToMany(Chollo::class, 'usuario-chollo', 'id_usuario', 'id_chollo')
+            ->withTimestamps();
+    }
 }

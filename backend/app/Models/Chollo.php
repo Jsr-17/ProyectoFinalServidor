@@ -19,6 +19,16 @@ class Chollo extends Model
         "puntuacion",
         "precio",
         "precio_descuento",
-        "disponible"
+        "disponible",
+
     ];
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class, 'id_chollo');
+    }
+    public function usuarios()
+    {
+        return $this->belongsToMany(Usuario::class, 'usuario-chollo', 'id_chollo', 'id_usuario')
+            ->withTimestamps();
+    }
 }

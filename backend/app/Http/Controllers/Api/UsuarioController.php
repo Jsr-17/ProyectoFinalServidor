@@ -55,7 +55,7 @@ class UsuarioController extends Controller
             $usuario = Usuario::create([
                 'nombre' => $request->nombre,
                 'email' => $request->email,
-                'pass' => bcrypt($request->password),
+                'pass' => bcrypt($request->pass),
             ]);
 
             return response()->json(["message" => "Usuario creado exitosamente", "usuario" => $usuario], 201);

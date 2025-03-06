@@ -21,12 +21,9 @@ class CholloController extends Controller
             return response()->json($data, 404);
         }
 
-        $data = [
-            "chollos" => $chollos,
-            "status" => 200
-        ];
 
-        return response()->json(["message" => $data, "status" => 200]);
+
+        return response()->json(["message" => $chollos, "status" => 200]);
     }
     public function buscarId($id)
     {
@@ -38,11 +35,8 @@ class CholloController extends Controller
             ];
             return response()->json(["message" => $data, "status" => 404]);
         }
-        $data = [
-            "response" => $chollo,
-            "status" => 200
-        ];
-        return response()->json(["message" => $data, "status" => 200]);
+
+        return response()->json(["message" => $chollo, "status" => 200]);
     }
     public function almacenarChollo(Request $request)
     {

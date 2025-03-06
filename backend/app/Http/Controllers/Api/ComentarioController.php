@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chollo;
-use Illuminate\Http\Request;;
+use Illuminate\Http\Request;
+;
 
 use App\Models\Comentario;
 use App\Models\Usuario;
@@ -67,7 +68,7 @@ class ComentarioController extends Controller
         $comentarios = Comentario::where('id_chollo', $id)->get();
 
         return response()->json([
-            'chollo' => $chollo->nombre,
+            'chollo' => $chollo->titulo,
             'comentarios' => $comentarios
         ]);
     }

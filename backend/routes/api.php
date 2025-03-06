@@ -26,14 +26,14 @@ Route::get("chollo", [CholloController::class, "index"]);
 Route::get("chollo/{id}", [CholloController::class, "buscarID"]);
 Route::post("chollo", [CholloController::class, "almacenarChollo"]);
 Route::put("chollo", [CholloController::class, "modificarChollo"]);
-Route::delete("chollo", [CholloController::class, "borrarChollo"]);
+Route::delete("chollo/{id}", [CholloController::class, "borrarChollo"]);
 
 //Usuarios
 Route::get("usuario", [UsuarioController::class, "index"]);
 Route::get("usuario/{id}", [UsuarioController::class, "buscarId"]);
 Route::post("usuario", [UsuarioController::class, "almacenarUsuario"]);
 Route::put("usuario", [UsuarioController::class, "modificarUsuario"]);
-Route::delete("usuario", [UsuarioController::class, "borrarUsuario"]);
+Route::delete("usuario/{id}", [UsuarioController::class, "borrarUsuario"]);
 
 
 //Comentarios

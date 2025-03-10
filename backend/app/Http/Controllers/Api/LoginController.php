@@ -22,7 +22,7 @@ class LoginController extends Controller
             return response()->json(['message' => 'Credenciales inválidas'], 401);
         }
         if (Hash::check($validated['pass'], $user->pass)) {
-            return response()->json(['message' => 'Login exitoso'], 200);
+            return response()->json(['message' => 'Login exitoso', "id" => $user->id], 200);
         }
 
         return response()->json(['message' => 'Credenciales inválidas'], 401);

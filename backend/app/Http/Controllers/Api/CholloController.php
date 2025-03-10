@@ -61,10 +61,7 @@ class CholloController extends Controller
 
 
         $cholloExistente = Chollo::where('titulo', $request->titulo)
-            ->where('descripcion', $request->descripcion)
-            ->where('categoria', $request->categoria)
-            ->where('precio', $request->precio)
-            ->where('url', $request->url)
+
             ->exists();
 
         if ($cholloExistente) {

@@ -51,6 +51,12 @@ class UsuarioController extends Controller
         }
 
         try {
+
+            $busqueda = Usuario::where("email", $request->email)->first();
+
+            if ($busqueda) {
+                return response()->json(["message" => "Usuario ya existe"], 401);
+            }
             // Crear el nuevo usuario
             $usuario = Usuario::create([
                 'nombre' => $request->nombre,

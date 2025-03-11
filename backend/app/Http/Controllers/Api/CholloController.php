@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 
 class CholloController extends Controller
 {
+    //esta ruta de la api devuelve todos los chollos de la base de datos
     public function index()
     {
+        //devuelve todos los registros
         $chollos = Chollo::all();
 
         if ($chollos->isEmpty()) {
@@ -25,8 +27,11 @@ class CholloController extends Controller
 
         return response()->json(["message" => $chollos, "status" => 200]);
     }
+
+    //esta ruta devuelve un chollo en concreto 
     public function buscarId($id)
     {
+        // find hace la busqueda en la base de datos de la id del chollo 
         $chollo = Chollo::find($id);
         if (!$chollo) {
             $data = [
@@ -38,8 +43,10 @@ class CholloController extends Controller
 
         return response()->json(["message" => $chollo, "status" => 200]);
     }
+    //Ruta la cual almacena un chollo en la base de datos a partir de una peticion post 
     public function almacenarChollo(Request $request)
     {
+        //validacion de los datos que manda el cliente 
         $validator = Validator::make($request->all(), [
             "titulo" => "required",
             "descripcion" => "required",
@@ -50,7 +57,7 @@ class CholloController extends Controller
             "precio_descuento" => "nullable|numeric",
             "disponible" => "required|boolean"
         ]);
-
+        //en caso de que la validacion aroje cualquier tipo de error 
         if ($validator->fails()) {
             return response()->json([
                 "message" => "Error en la validación de los datos",
@@ -59,7 +66,8 @@ class CholloController extends Controller
             ], 400);
         }
 
-
+        // funcion encargada de hacer la busqueda por columna especificada con el valor especificado en la segunda parte del parametro y 
+        //retornar si ya esta hecha
         $cholloExistente = Chollo::where('titulo', $request->titulo)
 
             ->exists();
@@ -73,6 +81,7 @@ class CholloController extends Controller
 
         // Crear el nuevo Chollo
         try {
+            //esta funcoin ya crea el chollo con todos los datos de la peticion una vez validados los datos 
             $chollo = Chollo::create($request->all());
 
             return response()->json([
@@ -88,13 +97,18 @@ class CholloController extends Controller
             ], 500);
         }
     }
+    //modifica el chollo 
     public function modificarChollo(Request $request)
     {
         if (!$request) {
             return response()->json(["message" => "Debe enviar usuario válido"], 404);
         }
+
         $data = $request->all();
+
+        //busqueda por id del chollo 
         $registro = Chollo::find($data["id"]);
+
         if (!$registro) {
             $data = ["message" => "El chollo no existe"];
             return response()->json($data, 404);
@@ -102,13 +116,15 @@ class CholloController extends Controller
         $registro->update($data);
         return response()->json(["message" => "Chollo actualizado correctamente", "chollo" => $registro], 200);
     }
+    //elimina por id el chollo de la base de datos 
     public function borrarChollo(int $id)
     {
+        //primero hace la busqueda 
         $registro = Chollo::find($id);
         if (!$registro) {
             return response()->json(["message" => "El chollo no existe"], 404);
         }
-
+        //una vez encontrado el chollo es eliminado 
         $registro->delete();
 
         return response()->json(["message" => "Chollo eliminado correctamente"], 200);

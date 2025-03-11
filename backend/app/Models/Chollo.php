@@ -24,6 +24,7 @@ class Chollo extends Model
     ];
     public function comentarios()
     {
+        //un comentario esta realacionado con un chollo por lo que usamos la clave ajena del id del chollo para identificarlo 
         return $this->hasMany(Comentario::class, 'id_chollo');
     }
     public function usuarios()
